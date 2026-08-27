@@ -1,0 +1,32 @@
+# Generic transaction profiles.
+# cpu_ms_per_tx: how many milliseconds of CPU time one transaction of this
+#                type consumes on average
+# ram_mb_per_tx: how much memory one transaction needs WHILE it is being
+#                processed (not persisted afterwards)
+# storage_kb_per_tx: how much persistent storage one transaction leaves
+#                behind (e.g. a log entry, a stored record)
+
+transaction_types:
+  light:
+    description: "Simple read/lookup operations"
+    cpu_ms_per_tx: 10
+    ram_mb_per_tx: 20
+    storage_kb_per_tx: 1
+
+  medium:
+    description: "Standard read/write operations with some processing"
+    cpu_ms_per_tx: 50
+    ram_mb_per_tx: 100
+    storage_kb_per_tx: 5
+
+  heavy:
+    description: "Compute-intensive operations"
+    cpu_ms_per_tx: 300
+    ram_mb_per_tx: 400
+    storage_kb_per_tx: 20
+
+defaults:
+  cpu_utilization_target: 0.7   # don't plan for 100% CPU usage
+  safety_margin: 1.2            # +20% buffer on top of raw calculation
+  retention_days: 30            # how long stored data is kept, for disk sizing
+  concurrency_factor: 3.0       # peak-load multiplier: 3x the even-distribution average, to account for daily traffic peaks

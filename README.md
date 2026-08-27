@@ -8,8 +8,8 @@ volume of transactions.
 ### 1. Get the code
 
 ```bash
-git clone <your-repo-url>
-cd hw-sizing-calculator
+git clone  https://github.com/KuzmaJn/hw-sizing-calc.git
+cd hw-sizing-calc
 ```
 
 ### 2. Build the Docker image
